@@ -15,6 +15,7 @@ var inputs   = {"right"  : Vector3.RIGHT,
 
 var animation_speed = 4
 var moving          = false
+var is_his_turn     = false
 
 # Stats ##############################################################
 @export var max_steps   : int
@@ -29,12 +30,23 @@ var mana    = max_mana
 var steps   = 0
 var actions = 0
 
+
+# Team ###############################################################
+enum teams {allies, enemies}
+@export var team : teams
+
 ######################################################################
 # Code ###############################################################
 ######################################################################
 func _ready():
 	position = position.snapped(Vector3(1,0.3,1) * tile_size)
 	position += Vector3(1,0.3,1.2) * tile_size/2
+	
+	match team:
+		teams.allies:
+			add_to_group("allies")
+		teams.enemies:
+			add_to_group("enemies")
 
 # Character controler ###############################################
 func _unhandled_input(event):

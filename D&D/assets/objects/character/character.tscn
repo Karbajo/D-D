@@ -30,7 +30,10 @@ max_mana = 10
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shaded = true
+alpha_cut = 2
 texture_filter = 0
+render_priority = 1
 sprite_frames = SubResource("SpriteFrames_55d2n")
 
 [node name="CollisionRay" type="RayCast3D" parent="."]

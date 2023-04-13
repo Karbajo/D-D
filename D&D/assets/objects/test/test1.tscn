@@ -26,6 +26,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, 
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 2, 7, 3)
+shadow_enabled = true
 
 [node name="Floors" type="Node3D" parent="."]
 
@@ -48,4 +49,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -8)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -4)
 
 [node name="Character" parent="." instance=ExtResource("3_ahhhp")]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 3, 0.4, -1)
+transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 3, 0.4, -1)
