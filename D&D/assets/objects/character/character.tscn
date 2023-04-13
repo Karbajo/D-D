@@ -36,8 +36,18 @@ texture_filter = 0
 render_priority = 1
 sprite_frames = SubResource("SpriteFrames_55d2n")
 
+[node name="Outline" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(3.7, 0, 0, 0, 3.3, 0, 0, 0, 3, 0, 0, 0)
+visible = false
+modulate = Color(0, 0, 0, 1)
+render_priority = -1
+sprite_frames = SubResource("SpriteFrames_55d2n")
+
 [node name="CollisionRay" type="RayCast3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.1, 0)
 shape = SubResource("BoxShape3D_oa1kb")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

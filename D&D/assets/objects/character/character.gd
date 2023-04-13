@@ -18,12 +18,13 @@ var moving          = false
 var is_his_turn     = false
 
 # Stats ##############################################################
-@export var max_steps   : int
-@export var max_actions : int
-@export var bag_size    : int
-@export var max_health  : int
-@export var max_mana    : int
-@export var armor       : int
+@export var character_name : String
+@export var max_steps      : int
+@export var max_actions    : int
+@export var bag_size       : int
+@export var max_health     : int
+@export var max_mana       : int
+@export var armor          : int
 
 var health  = max_health
 var mana    = max_mana 
@@ -34,6 +35,8 @@ var actions = 0
 # Team ###############################################################
 enum teams {allies, enemies}
 @export var team : teams
+
+@onready var outline = $Outline
 
 ######################################################################
 # Code ###############################################################
@@ -74,3 +77,10 @@ func make_animation(dir):
 
 func _process(delta):
 	pass
+
+# signals #############################################################
+func _on_mouse_entered():
+	outline.visible = true
+
+func _on_mouse_exited():
+	outline.visible = false
