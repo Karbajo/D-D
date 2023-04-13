@@ -13,6 +13,7 @@ var inputs   = {"right"  : Vector3.RIGHT,
 
 @onready var ray = $CollisionRay
 
+var order = -1 #inicializacion de valor
 var animation_speed = 4
 var moving          = false
 var is_his_turn     = false
@@ -60,11 +61,15 @@ func _unhandled_input(event):
 			move(dir)
 
 func move(dir):
-	ray.target_position = inputs[dir] * tile_size
-	ray.force_raycast_update()
-	if !ray.is_colliding() and steps < max_steps:
-		make_animation(dir)
-		steps += 1
+	if order == get_parent_node_3d().turno:
+		ray.target_position = inputs[dir] * tile_size
+		ray.force_raycast_update()
+		if !ray.is_colliding() and steps < max_steps:
+			make_animation(dir)
+			steps += 1
+		elif steps >= max_steps:
+			get_parent_node_3d().cambioTurno()
+			steps=0
 
 func make_animation(dir):
 	var tween = create_tween()
@@ -76,6 +81,7 @@ func make_animation(dir):
 
 
 func _process(delta):
+	
 	pass
 
 # signals #############################################################
@@ -84,3 +90,6 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	outline.visible = false
+
+func get_Name():
+	return character_name

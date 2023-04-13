@@ -9,6 +9,8 @@ func _ready():
 	position = current_character.position + offset
 	transform.rotated(Vector3(1,0,0),30)
 
+func cambioTurno():
+	current_character = Metadata.party_members[get_parent_node_3d().turno]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
