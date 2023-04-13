@@ -13,7 +13,7 @@ var inputs   = {"right"  : Vector3.RIGHT,
 
 @onready var ray = $CollisionRay
 
-var order = -1 #inicializacion de valor
+var order           = -1 #inicializacion de valor
 var animation_speed = 4
 var moving          = false
 var is_his_turn     = false
@@ -30,7 +30,7 @@ var is_his_turn     = false
 var health  = max_health
 var mana    = max_mana 
 var steps   = 0
-var actions = 0
+var actions = 1
 
 
 # Team ###############################################################
@@ -61,15 +61,33 @@ func _unhandled_input(event):
 			move(dir)
 
 func move(dir):
-	if order == get_parent_node_3d().turno:
+	if order == get_parent_node_3d().turn:
 		ray.target_position = inputs[dir] * tile_size
 		ray.force_raycast_update()
-		if !ray.is_colliding() and steps < max_steps:
+		if check_ray_collision() and steps < max_steps:
 			make_animation(dir)
 			steps += 1
 		elif steps >= max_steps:
-			get_parent_node_3d().cambioTurno()
+			check_actions()
 			steps=0
+
+func check_actions():
+	if actions < max_actions:
+		actions += 1
+	else:
+		get_parent_node_3d().change_turn()
+		actions = 1
+
+#Comprueba si es aliado o enemigo para poder atravesarlo o no
+func check_ray_collision():
+	var collider = ray.get_collider()
+	if collider != null :
+		if collider.has_method("get_team"):
+			return collider.get_team() == team
+		else:
+			return false
+	else: 
+		return true 
 
 func make_animation(dir):
 	var tween = create_tween()
@@ -91,5 +109,7 @@ func _on_mouse_entered():
 func _on_mouse_exited():
 	outline.visible = false
 
-func get_Name():
-	return character_name
+# getters & setters ###################################################
+
+func get_team():
+	return team

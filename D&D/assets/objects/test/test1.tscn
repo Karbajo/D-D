@@ -1,14 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://dia2q3wqdihrk"]
+[gd_scene load_steps=7 format=3 uid="uid://dia2q3wqdihrk"]
 
 [ext_resource type="PackedScene" uid="uid://dfwllh63qqtee" path="res://assets/objects/scenario/floor.tscn" id="1_dhdyt"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kmm76"]
 [ext_resource type="Script" path="res://scripts/follow_player.gd" id="1_rlh3t"]
 [ext_resource type="PackedScene" uid="uid://boqjiilkd0f84" path="res://assets/objects/scenario/wall.tscn" id="2_afka8"]
 [ext_resource type="PackedScene" uid="uid://5uruvm1dojfh" path="res://assets/objects/character/character.tscn" id="3_ahhhp"]
+[ext_resource type="PackedScene" uid="uid://4314jd0srvkt" path="res://assets/objects/character/enemie.tscn" id="6_jjpgm"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_kmm76")
-characters = Array[Area3D]([null, null])
 
 [node name="GridMap" type="GridMap" parent="."]
 cell_size = Vector3(1, 1, 1)
@@ -47,14 +47,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -8)
 [node name="Floor3" parent="Floors" instance=ExtResource("1_dhdyt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -4)
 
-[node name="Character" parent="." instance=ExtResource("3_ahhhp")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.788311, 0.615277, 0, -0.615277, 0.788311, 0, -1, 5)
+shadow_enabled = true
+
+[node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 3, 0.4, -1)
-character_name = "Player1"
+
+[node name="Character" parent="." instance=ExtResource("3_ahhhp")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 3, 0.4, -1)
+character_name = "PLayer1"
 
 [node name="Character2" parent="." instance=ExtResource("3_ahhhp")]
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 5, 0.4, -1)
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 5, 0.4, -1)
 character_name = "Player2"
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, -1, 5)
-shadow_enabled = true
+[node name="Enemie" parent="." instance=ExtResource("6_jjpgm")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 4, 0.4, -6)

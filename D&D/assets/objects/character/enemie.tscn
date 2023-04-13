@@ -6,3 +6,6 @@
 [node name="Enemie" instance=ExtResource("1_esu4y")]
 script = ExtResource("2_fet0c")
 team = 1
+
+[node name="Outline" parent="." index="1"]
+modulate = Color(0.568627, 0.152941, 0, 1)

@@ -21,6 +21,7 @@ animations = [{
 [sub_resource type="BoxShape3D" id="BoxShape3D_oa1kb"]
 
 [node name="Character" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
 script = ExtResource("1_r3qkh")
 max_steps = 5
 max_actions = 2
@@ -39,11 +40,12 @@ sprite_frames = SubResource("SpriteFrames_55d2n")
 [node name="Outline" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(3.7, 0, 0, 0, 3.3, 0, 0, 0, 3, 0, 0, 0)
 visible = false
-modulate = Color(0, 0, 0, 1)
+modulate = Color(0, 0.364706, 0.686275, 1)
 render_priority = -1
 sprite_frames = SubResource("SpriteFrames_55d2n")
 
 [node name="CollisionRay" type="RayCast3D" parent="."]
+collide_with_areas = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.1, 0)
