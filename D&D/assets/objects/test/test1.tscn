@@ -1,0 +1,51 @@
+[gd_scene load_steps=5 format=3 uid="uid://dia2q3wqdihrk"]
+
+[ext_resource type="PackedScene" uid="uid://dfwllh63qqtee" path="res://assets/objects/scenario/floor.tscn" id="1_dhdyt"]
+[ext_resource type="Script" path="res://scripts/follow_player.gd" id="1_rlh3t"]
+[ext_resource type="PackedScene" uid="uid://boqjiilkd0f84" path="res://assets/objects/scenario/wall.tscn" id="2_afka8"]
+[ext_resource type="PackedScene" uid="uid://5uruvm1dojfh" path="res://assets/objects/character/character.tscn" id="3_ahhhp"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GridMap" type="GridMap" parent="."]
+cell_size = Vector3(1, 1, 1)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="." node_paths=PackedStringArray("current_character")]
+transform = Transform3D(1, 0, 0, 0, 0.768284, 0.64011, 0, -0.64011, 0.768284, 2, 5, 3)
+script = ExtResource("1_rlh3t")
+current_character = NodePath("../Character")
+
+[node name="Wall2" parent="." instance=ExtResource("2_afka8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, -3, -12)
+
+[node name="Wall3" parent="." instance=ExtResource("2_afka8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, -3, -8)
+
+[node name="Wall4" parent="." instance=ExtResource("2_afka8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, -3, -4)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 2, 7, 3)
+
+[node name="Floors" type="Node3D" parent="."]
+
+[node name="Floor" parent="Floors" instance=ExtResource("1_dhdyt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
+
+[node name="Floor4" parent="Floors" instance=ExtResource("1_dhdyt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -3, 0)
+
+[node name="Floor5" parent="Floors" instance=ExtResource("1_dhdyt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -3, -4)
+
+[node name="Floor6" parent="Floors" instance=ExtResource("1_dhdyt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -3, -8)
+
+[node name="Floor2" parent="Floors" instance=ExtResource("1_dhdyt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -8)
+
+[node name="Floor3" parent="Floors" instance=ExtResource("1_dhdyt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -4)
+
+[node name="Character" parent="." instance=ExtResource("3_ahhhp")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 3, 0.4, -1)

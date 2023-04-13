@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dfwllh63qqtee"]
+
+[ext_resource type="ArrayMesh" uid="uid://hi8onh826x1p" path="res://assets/models/scenario/floor.obj" id="1_rempp"]
+
+[node name="Floor" type="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0738039, -1.70479, 0.903819)
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_rempp")
