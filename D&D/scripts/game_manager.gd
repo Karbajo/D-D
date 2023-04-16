@@ -1,7 +1,5 @@
 extends Node3D
 
-var turn : int = 0
-
 @onready var characters = [$Character, $Character2]
 
 # Called when the node enters the scene tree for the first time.
@@ -14,10 +12,10 @@ func _ready():
 	iniciative()
 
 func change_turn():
-	if turn < Metadata.get_players_size()-1:
-		turn +=1
+	if Metadata.turn < Metadata.get_players_size()-1:
+		Metadata.turn += 1
 	else :
-		turn=0
+		Metadata.turn = 0
 	
 	get_node("XRCamera3D").change_turn()
 

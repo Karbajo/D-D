@@ -27,6 +27,10 @@ var is_his_turn     = false
 @export var max_mana       : int
 @export var armor          : int
 
+var max_weapons = 1
+var weapons     = [] 
+var selected_weapon = Weapon.w1
+
 var health  = max_health
 var mana    = max_mana 
 var steps   = 0
@@ -38,11 +42,15 @@ enum teams {allies, enemies}
 @export var team : teams
 
 @onready var outline = $Outline
+var is_selected = false
 
 ######################################################################
 # Code ###############################################################
 ######################################################################
 func _ready():
+	var health  = max_health
+	var mana    = max_mana 
+	
 	position = position.snapped(Vector3(1,0.3,1) * tile_size)
 	position += Vector3(1,0.3,1.2) * tile_size/2
 	
@@ -61,7 +69,7 @@ func _unhandled_input(event):
 			move(dir)
 
 func move(dir):
-	if order == get_parent_node_3d().turn:
+	if order == Metadata.turn:
 		ray.target_position = inputs[dir] * tile_size
 		ray.force_raycast_update()
 		if check_ray_collision() and steps < max_steps:
@@ -99,17 +107,39 @@ func make_animation(dir):
 
 
 func _process(delta):
-	
-	pass
+	check_selected()
 
-# signals #############################################################
+# attack ############################################################
+func check_selected():
+	if is_selected:
+		if Input.is_action_just_pressed("interact"):
+			check_hit()
+
+func check_hit():
+	var attack_character = Metadata.get_actual_player()
+	if attack_character.team != team and check_hit_range(attack_character, attack_character.selected_weapon):
+		health = health - attack_character.selected_weapon.damage
+		attack_character.check_actions()
+		print(health)
+
+func check_hit_range(attack_character, weapon):
+	var distance = position.distance_to(attack_character.position)
+	if weapon.range_type == Weapon.range.MELEE:
+		if distance <= tile_size:
+			return true
+	else:
+		return false 
+
+# signals ###########################################################
 func _on_mouse_entered():
 	outline.visible = true
+	is_selected = true
 
 func _on_mouse_exited():
 	outline.visible = false
+	is_selected = false
 
-# getters & setters ###################################################
+# getters & setters #################################################
 
 func get_team():
 	return team

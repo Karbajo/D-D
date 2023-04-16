@@ -10,7 +10,7 @@ func _ready():
 	transform.rotated(Vector3(1,0,0),30)
 
 func change_turn():
-	current_character = Metadata.party_members[get_parent_node_3d().turn]
+	current_character = Metadata.party_members[Metadata.turn]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
