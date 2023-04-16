@@ -27,14 +27,15 @@ var is_his_turn     = false
 @export var max_mana       : int
 @export var armor          : int
 
-var max_weapons = 1
-var weapons     = [] 
+var max_weapons     = 1
+var weapons         = [] 
 var selected_weapon = Weapon.w1
 
-var health  = max_health
-var mana    = max_mana 
-var steps   = 0
-var actions = 1
+var health 
+var mana 
+var steps        = 0
+var actions      = 1
+var is_in_action = false
 
 
 # Team ###############################################################
@@ -48,8 +49,8 @@ var is_selected = false
 # Code ###############################################################
 ######################################################################
 func _ready():
-	var health  = max_health
-	var mana    = max_mana 
+	health  = max_health
+	mana    = max_mana 
 	
 	position = position.snapped(Vector3(1,0.3,1) * tile_size)
 	position += Vector3(1,0.3,1.2) * tile_size/2
@@ -73,11 +74,11 @@ func move(dir):
 		ray.target_position = inputs[dir] * tile_size
 		ray.force_raycast_update()
 		if check_ray_collision() and steps < max_steps:
+			is_in_action = true
 			make_animation(dir)
 			steps += 1
 		elif steps >= max_steps:
 			check_actions()
-			steps=0
 
 func check_actions():
 	if actions < max_actions:
@@ -85,6 +86,8 @@ func check_actions():
 	else:
 		get_parent_node_3d().change_turn()
 		actions = 1
+	steps = 0
+	is_in_action = false
 
 #Comprueba si es aliado o enemigo para poder atravesarlo o no
 func check_ray_collision():
@@ -117,10 +120,11 @@ func check_selected():
 
 func check_hit():
 	var attack_character = Metadata.get_actual_player()
-	if attack_character.team != team and check_hit_range(attack_character, attack_character.selected_weapon):
-		health = health - attack_character.selected_weapon.damage
-		attack_character.check_actions()
-		print(health)
+	if !attack_character.is_in_action:
+		if attack_character.team != team and check_hit_range(attack_character, attack_character.selected_weapon):
+			health = health - attack_character.selected_weapon.damage
+			attack_character.check_actions()
+			print(health)
 
 func check_hit_range(attack_character, weapon):
 	var distance = position.distance_to(attack_character.position)

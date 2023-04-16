@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dia2q3wqdihrk"]
+[gd_scene load_steps=8 format=3 uid="uid://dia2q3wqdihrk"]
 
 [ext_resource type="PackedScene" uid="uid://dfwllh63qqtee" path="res://assets/objects/scenario/floor.tscn" id="1_dhdyt"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_kmm76"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://boqjiilkd0f84" path="res://assets/objects/scenario/wall.tscn" id="2_afka8"]
 [ext_resource type="PackedScene" uid="uid://5uruvm1dojfh" path="res://assets/objects/character/character.tscn" id="3_ahhhp"]
 [ext_resource type="PackedScene" uid="uid://4314jd0srvkt" path="res://assets/objects/character/enemie.tscn" id="6_jjpgm"]
+[ext_resource type="PackedScene" uid="uid://bjjokdqvosel" path="res://assets/interface/interface.tscn" id="7_2owuu"]
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_kmm76")
@@ -51,9 +52,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, -4)
 transform = Transform3D(1, 0, 0, 0, 0.788311, 0.615277, 0, -0.615277, 0.788311, 0, -1, 5)
 shadow_enabled = true
 
-[node name="Area3D" type="Area3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 3, 0.4, -1)
-
 [node name="Character" parent="." instance=ExtResource("3_ahhhp")]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 3, 0.4, -1)
 character_name = "PLayer1"
@@ -64,3 +62,5 @@ character_name = "Player2"
 
 [node name="Enemie" parent="." instance=ExtResource("6_jjpgm")]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 4, 0.4, -6)
+
+[node name="Interface" parent="." instance=ExtResource("7_2owuu")]
