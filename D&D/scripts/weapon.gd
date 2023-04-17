@@ -13,6 +13,7 @@ class weapon:
 		range_type = rg
 
 var w1 = weapon.new("weapon1", 1, range.MELEE)
+var wDistance = weapon.new("weaponDistance", 1, range.DISTANCE)
 
 var weapons = [w1]
 

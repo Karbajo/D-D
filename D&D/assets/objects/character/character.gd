@@ -29,7 +29,7 @@ var is_his_turn     = false
 
 var max_weapons     = 1
 var weapons         = [] 
-var selected_weapon = Weapon.w1
+var selected_weapon = Weapon.wDistance
 
 var health 
 var mana 
@@ -44,6 +44,8 @@ enum teams {allies, enemies}
 
 @onready var outline = $Outline
 var is_selected = false
+
+var eps = 0.01   #Variable para restar enteros
 
 ######################################################################
 # Code ###############################################################
@@ -131,9 +133,18 @@ func check_hit_range(attack_character, weapon):
 	if weapon.range_type == Weapon.range.MELEE:
 		if distance <= tile_size:
 			return true
-	else:
-		return false 
+	elif weapon.range_type == Weapon.range.DISTANCE and distance > tile_size:
+		var angle = Vector3(1,0,0).angle_to(position - attack_character.position)
+		print(angle)
+		if check_angle(angle):
+			return true
+	return false 
 
+func check_angle(angle):
+	for i in range(8):
+		if abs(angle - i*PI/4) < eps:
+			return true
+	return false
 # signals ###########################################################
 func _on_mouse_entered():
 	outline.visible = true

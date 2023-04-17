@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://5uruvm1dojfh"]
+[gd_scene load_steps=7 format=3 uid="uid://5uruvm1dojfh"]
 
 [ext_resource type="Texture2D" uid="uid://xjt6eckeewuj" path="res://assets/sprites/character/base_character.png" id="1_cyrgj"]
 [ext_resource type="Script" path="res://assets/objects/character/character.gd" id="1_r3qkh"]
+[ext_resource type="PackedScene" uid="uid://bjjokdqvosel" path="res://assets/interface/interface.tscn" id="3_loyvj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r5ufr"]
 atlas = ExtResource("1_cyrgj")
@@ -50,6 +51,8 @@ collide_with_areas = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.1, 0)
 shape = SubResource("BoxShape3D_oa1kb")
+
+[node name="Interface" parent="." instance=ExtResource("3_loyvj")]
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
