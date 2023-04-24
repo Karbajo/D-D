@@ -1,6 +1,8 @@
 extends Node3D
 
 @onready var characters = [$Character, $Character2]
+@onready var enemies = [$Enemie]
+@onready var camera = $XRCamera3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,4 +28,12 @@ func iniciative():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	check_input()
+
+func check_input():
+	if Input.is_action_just_pressed("left_rotation"):
+		camera.transform = camera.transform.rotated(Vector3(0,1,0), -PI/2)
+		camera.current_offset = (camera.current_offset + 1) % 4 
+		
+#		for character in characters:
+#			character.rotation = Vector3(-PI/180,0,0)
