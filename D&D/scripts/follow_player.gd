@@ -10,7 +10,7 @@ func _ready():
 	position = current_character.position + offset
 
 func change_turn():
-	current_character = Metadata.party_members[Metadata.turn]
+	current_character = Controller.get_actual_player()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

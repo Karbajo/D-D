@@ -8,3 +8,9 @@ func get_players_size():
 
 func get_actual_player():
 	return party_members[turn]
+
+func initialize_character_inventory():
+	for character in party_members.values():
+		character.inventory = Inventory.new(character.bag_size)
+
+

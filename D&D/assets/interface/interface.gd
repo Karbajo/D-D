@@ -9,11 +9,11 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#Se que esto está regular hecho, pero es algo temporal
-	if Metadata.get_actual_player() == get_parent():
+	if Controller.get_actual_player() == get_parent():
 		visible = true
 	else:
 		visible = false
 	$TextEdit.text = get_parent().to_string() + "\n" + "N. accion: " + str(get_parent().actions)
 
 func _on_button_pressed():
-	Metadata.get_actual_player().check_actions()
+	Controller.get_actual_player().check_actions()

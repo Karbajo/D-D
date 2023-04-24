@@ -1,5 +1,7 @@
 extends Area3D
 
+class_name Character
+
 ######################################################################
 # Variables ##########################################################
 ######################################################################
@@ -27,9 +29,11 @@ var is_his_turn     = false
 @export var max_mana       : int
 @export var armor          : int
 
+var inventory              : Inventory
+
 var max_weapons     = 1
 var weapons         = [] 
-var selected_weapon = Weapon.wDistance
+var selected_weapon = Weapon.new("weaponDistance", 1, true)
 
 var health 
 var mana 
@@ -72,7 +76,7 @@ func _unhandled_input(event):
 			move(dir)
 
 func move(dir):
-	if order == Metadata.turn:
+	if order == Controller.turn:
 		ray.target_position = inputs[dir] * tile_size
 		ray.force_raycast_update()
 		if check_ray_collision() and steps < max_steps:
@@ -121,7 +125,7 @@ func check_selected():
 			check_hit()
 
 func check_hit():
-	var attack_character = Metadata.get_actual_player()
+	var attack_character = Controller.get_actual_player()
 	if !attack_character.is_in_action:
 		if attack_character.team != team and check_hit_range(attack_character, attack_character.selected_weapon):
 			health = health - attack_character.selected_weapon.damage

@@ -1,20 +1,17 @@
-extends Node
+extends Item
 
+class_name Weapon
 enum range {MELEE, DISTANCE}
 
-class weapon:
-	var weapon_name : String
-	var damage      : int
-	var range_type  : range
-	
-	func _init(w_name, dmg, rg):
-		weapon_name = w_name
-		damage = dmg
-		range_type = rg
+var damage      : int
+var range_type  : range
 
-var w1 = weapon.new("weapon1", 1, range.MELEE)
-var wDistance = weapon.new("weaponDistance", 1, range.DISTANCE)
-
-var weapons = [w1]
+func _init(iname, dmg, is_ranged):
+	item_name = iname
+	damage = dmg
+	if is_ranged:
+		range_type = range.DISTANCE
+	else:
+		range_type = range.MELEE
 
 

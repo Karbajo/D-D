@@ -17,8 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Metadata="*res://scripts/metadata.gd"
-Weapon="*res://scripts/weapon.gd"
+Controller="*res://scripts/controller.gd"
 
 [editor_plugins]
 
