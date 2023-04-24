@@ -49,8 +49,6 @@ enum teams {allies, enemies}
 @onready var outline = $Outline
 var is_selected = false
 
-var eps = 0.01   #Variable para restar enteros
-
 ######################################################################
 # Code ###############################################################
 ######################################################################
@@ -127,28 +125,11 @@ func check_selected():
 func check_hit():
 	var attack_character = Controller.get_actual_player()
 	if !attack_character.is_in_action:
-		if attack_character.team != team and check_hit_range(attack_character, attack_character.selected_weapon):
+		if attack_character.team != team and attack_character.inventory.check_hit_range(attack_character, self):
 			health = health - attack_character.selected_weapon.damage
 			attack_character.check_actions()
 			print(health)
 
-func check_hit_range(attack_character, weapon):
-	var distance = position.distance_to(attack_character.position)
-	if weapon.range_type == Weapon.range.MELEE:
-		if distance <= tile_size:
-			return true
-	elif weapon.range_type == Weapon.range.DISTANCE and distance > tile_size:
-		var angle = Vector3(1,0,0).angle_to(position - attack_character.position)
-		print(angle)
-		if check_angle(angle):
-			return true
-	return false 
-
-func check_angle(angle):
-	for i in range(8):
-		if abs(angle - i*PI/4) < eps:
-			return true
-	return false
 # signals ###########################################################
 func _on_mouse_entered():
 	outline.visible = true
